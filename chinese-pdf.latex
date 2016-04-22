@@ -1,0 +1,64 @@
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$]{$documentclass$}
+\usepackage{ctex} % Chinese support
+\usepackage{hyperref} % autoref
+  \def\figureautorefname{图}%
+  \def\tableautorefname{表}%
+\usepackage{graphicx} % Graphics support
+  \graphicspath{{figure/}} 
+\usepackage{geometry} % page view geometry design
+  \geometry{left=2.8cm,right=2.8cm,top=2.54cm,bottom=2.54cm}
+\usepackage{multirow} % tables
+\usepackage{array}  % table design
+\usepackage{enumerate} % enumberate items
+\usepackage{enumitem} % enumberate items
+\usepackage{amsmath} % for equations
+\usepackage{longtable, booktabs}
+\usepackage{color} % for html conversion
+\usepackage{framed}
+$if(title)$
+\title{$title$}
+$endif$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+\date{$date$}
+
+\begin{document}
+$if(title)$
+%\maketitle
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+$body$
+
+$if(natbib)$
+$if(biblio-files)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$biblio-files$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
+
